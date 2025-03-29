@@ -9,7 +9,7 @@ function ShoppingLayout() {
   return (
     <div className="flex min-h-screen w-full">
       {/* shopping-sidebar */}
-      <ShoppingSideBar />
+      {/* <ShoppingSideBar /> */}
       <div className="flex flex-1 flex-col">
         {/* shopping header */}
        <ShoppingHeader />
