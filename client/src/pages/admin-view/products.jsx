@@ -59,7 +59,7 @@ function AdminProducts() {
         dispatch(fecthAllProducts());
         setOpenCreateProductsDialog(false);
         setImageFile(null),
-          setFormData(initialFormData);
+        setFormData(initialFormData);
       }
     }
 
