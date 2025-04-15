@@ -7,6 +7,8 @@ import { shoppingViewHeaderMenuItems } from "@/config"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { Avatar, AvatarFallback } from "../ui/avatar"
 import { logoutUser } from "@/store/auth-slice"
+import UserCartWrapper from "./card-wrapper"
+import { useState } from "react"
 
 function MenuItems() {
   return <nav className="flex flex-col m-8 lg:m-0 lg:mb-0 lg:items-center gap-6 lg:flex-row">
@@ -18,6 +20,7 @@ function MenuItems() {
 
 function HeaderRightContent() {
   const { user } = useSelector(state => state.auth);
+  const [openCartSheet, setOpenCartSheet] = useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -26,10 +29,13 @@ function HeaderRightContent() {
   }
 
   return <div className="flex m-8 lg:items-center lg:flex-row flex-col gap-4">
-    <Button variant="outline" size="icon">
-      <ShoppingCart className="w-6 h-6" />
-      <span className="sr-only">User Cart</span>
-    </Button>
+    <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
+      <Button onClick={() => setOpenCartSheet(true)} variant="outline" size="icon" className="cursor-pointer">
+        <ShoppingCart className="w-6 h-6" />
+        <span className="sr-only">User Cart</span>
+      </Button>
+      <UserCartWrapper />
+    </Sheet>
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="bg-black">
