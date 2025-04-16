@@ -4,6 +4,15 @@ import UserCartItemsContent from "./cart-items-content";
 
 
 function UserCartWrapper({ cartItems }) {
+
+  const totalCartAmount = cartItems && cartItems.length > 0
+  ? cartItems.reduce((sum, currentItem) => {
+      const price = currentItem?.salePrice > 0 ? currentItem.salePrice : currentItem.price;
+      return sum + price * currentItem?.quantity;
+    }, 0)
+  : 0;
+
+
   return (
     <SheetContent className="sm:max-w-md">
       <SheetHeader className="p-6">
@@ -20,7 +29,7 @@ function UserCartWrapper({ cartItems }) {
       <div className="space-y-4 px-6">
         <div className="flex justify-between">
           <span className="font-bold">Total</span>
-          <span className="font-bold">$1000</span>
+          <span className="font-bold">${totalCartAmount}</span>
         </div>
       </div>
       <div className="px-6">
