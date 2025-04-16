@@ -6,11 +6,11 @@ import UserCartItemsContent from "./cart-items-content";
 function UserCartWrapper({ cartItems }) {
 
   const totalCartAmount = cartItems && cartItems.length > 0
-  ? cartItems.reduce((sum, currentItem) => {
+    ? cartItems.reduce((sum, currentItem) => {
       const price = currentItem?.salePrice > 0 ? currentItem.salePrice : currentItem.price;
       return sum + price * currentItem?.quantity;
     }, 0)
-  : 0;
+    : 0;
 
 
   return (

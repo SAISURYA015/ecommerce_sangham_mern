@@ -4,11 +4,35 @@ import { Button } from "../ui/button";
 import { Dialog, DialogContent } from "../ui/dialog";
 import { Separator } from "../ui/separator";
 import { Input } from "../ui/input";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
+import { toast } from "sonner"
+import { setProductDetails } from "@/store/shop/products-slice";
 
 function ProductDetailsDialog({ open, setOpen, productDetails }) {
+
+  const dispatch = useDispatch()
+  const { user } = useSelector(state => state.auth)
+
+
+  function handleAddtoCart(getCurrentProductId) {
+    console.log(getCurrentProductId);
+    dispatch(addToCart({ userId: user?.id, productId: getCurrentProductId, quantity: 1 }))
+      .then(data => {
+        if (data?.payload?.success) {
+          dispatch(fetchCartItems(user?.id));
+          toast("Product is added to cart")
+        }
+      });
+  }
+
+  function handleDialogClose() {
+    setOpen(false)
+    dispatch(setProductDetails());
+  }
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleDialogClose}>
       <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
         <div className="relative overflow-hidden rounded-lg">
           <img src={productDetails?.image} alt={productDetails?.title} width={600} height={600} className="aspect-square w-full object-cover" />
@@ -31,16 +55,16 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
           </div>
           <div className="flex items-center gap-2 mt-2">
             <div className="flex items-center gap-0.5">
-              <StarIcon className="w-5 h-5 fill-primary"/>
-              <StarIcon className="w-5 h-5 fill-primary"/>
-              <StarIcon className="w-5 h-5 fill-primary"/>
-              <StarIcon className="w-5 h-5 fill-primary"/>
-              <StarIcon className="w-5 h-5 fill-primary"/>
+              <StarIcon className="w-5 h-5 fill-primary" />
+              <StarIcon className="w-5 h-5 fill-primary" />
+              <StarIcon className="w-5 h-5 fill-primary" />
+              <StarIcon className="w-5 h-5 fill-primary" />
+              <StarIcon className="w-5 h-5 fill-primary" />
             </div>
             <span className="text-muted-foreground ">(4.5)</span>
           </div>
           <div className="my-5">
-            <Button className="w-full">Add to Cart</Button>
+            <Button onClick={() => handleAddtoCart(productDetails?._id)} className="w-full cursor-pointer">Add to Cart</Button>
           </div>
           <Separator />
           <div className="max-h-[300px] overflow-auto">
@@ -57,11 +81,11 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                     <h3 className="font-bold">Sai Surya</h3>
                   </div>
                   <div className="flex items-center gap-0.5">
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
                   </div>
                   <p className="text-muted-foreground">This is an awesome product</p>
                 </div>
@@ -80,11 +104,11 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                     <h3 className="font-bold">Sai Surya</h3>
                   </div>
                   <div className="flex items-center gap-0.5">
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
                   </div>
                   <p className="text-muted-foreground">This is an awesome product</p>
                 </div>
@@ -103,18 +127,18 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                     <h3 className="font-bold">Sai Surya</h3>
                   </div>
                   <div className="flex items-center gap-0.5">
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
-                    <StarIcon className="w-5 h-5 fill-primary"/>
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
+                    <StarIcon className="w-5 h-5 fill-primary" />
                   </div>
                   <p className="text-muted-foreground">This is an awesome product</p>
                 </div>
               </div>
             </div>
             <div className="mt-6 flex gap-2">
-              <Input placeholder="write a review..."/>
+              <Input placeholder="write a review..." />
               <Button>Submit</Button>
             </div>
           </div>

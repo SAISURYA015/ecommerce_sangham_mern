@@ -48,7 +48,7 @@ function ShoopingProductTile({ product, handleGetProductDetails, handleAddtoCart
         </CardContent>
       </div>
       <CardFooter>
-        <Button onClick={() => handleAddtoCart(product?._id)} className="w-full">
+        <Button onClick={() => handleAddtoCart(product?._id)} className="w-full cursor-pointer">
           Add TO Cart
         </Button>
       </CardFooter>
