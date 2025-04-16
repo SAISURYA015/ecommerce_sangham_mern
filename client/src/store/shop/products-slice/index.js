@@ -42,7 +42,6 @@ const shoppingProductSlice = createSlice({
       state.isLoding = true
     }).addCase(fetchAllFilteredProducts.fulfilled, (state, action)=>{
       // console.log(action.payload, 'action.payload');
-      
       state.isLoding = false
       state.productList = action.payload.data
     }).addCase(fetchAllFilteredProducts.rejected, (state, action)=>{
@@ -51,8 +50,7 @@ const shoppingProductSlice = createSlice({
     }).addCase(fetchProductDetails.pending, (state, action)=>{
       state.isLoding = true;
     }).addCase(fetchProductDetails.fulfilled, (state, action)=>{
-      // console.log(action.payload, 'action.payload');
-      
+      // console.log(action.payload, 'action.payload'); 
       state.isLoding = false;
       state.productDetails = action.payload.data
     }).addCase(fetchProductDetails.rejected, (state, action)=>{

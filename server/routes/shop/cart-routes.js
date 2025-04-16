@@ -10,8 +10,8 @@ const {
 const router = express.Router();
 
 router.post('/add', addToCart)
-router.post('/get/:userId', fetchCartItems)
-router.post('/update-cart', updateCartItemQty)
-router.post('/:userId/:productId', deleteCartItem)
+router.get('/get/:userId', fetchCartItems)
+router.put('/update-cart', updateCartItemQty)
+router.delete('/:userId/:productId', deleteCartItem)
 
 module.exports = router

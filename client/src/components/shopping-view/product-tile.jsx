@@ -4,10 +4,10 @@ import { Button } from "../ui/button"
 import { Card, CardContent, CardFooter } from "../ui/card"
 
 
-function ShoopingProductTile({ product, handleGetProductDetails }) {
+function ShoopingProductTile({ product, handleGetProductDetails, handleAddtoCart }) {
   return (
     <Card className="w-full pt-0  max-w-sm mx-auto m-5">
-      <div onClick={()=>handleGetProductDetails(product?._id)}>
+      <div onClick={() => handleGetProductDetails(product?._id)}>
         <div className="relative">
           <img
             src={product?.image}
@@ -46,12 +46,12 @@ function ShoopingProductTile({ product, handleGetProductDetails }) {
             }
           </div>
         </CardContent>
-        <CardFooter>
-          <Button className="w-full">
-            Add TO Cart
-          </Button>
-        </CardFooter>
       </div>
+      <CardFooter>
+        <Button onClick={() => handleAddtoCart(product?._id)} className="w-full">
+          Add TO Cart
+        </Button>
+      </CardFooter>
     </Card>
   )
 }

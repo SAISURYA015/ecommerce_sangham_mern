@@ -1,8 +1,9 @@
 import { Button } from "../ui/button";
 import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
+import UserCartItemsContent from "./cart-items-content";
 
 
-function UserCartWrapper() {
+function UserCartWrapper({ cartItems }) {
   return (
     <SheetContent className="sm:max-w-md">
       <SheetHeader className="p-6">
@@ -10,7 +11,12 @@ function UserCartWrapper() {
           Your Cart
         </SheetTitle>
       </SheetHeader>
-      <div className="space-y-4"></div>
+      <div className="space-y-4">
+        {
+          cartItems && cartItems.length > 0 ?
+            cartItems.map(item => <UserCartItemsContent cartItem={item} />) : null
+        }
+      </div>
       <div className="space-y-4 px-6">
         <div className="flex justify-between">
           <span className="font-bold">Total</span>
@@ -20,7 +26,7 @@ function UserCartWrapper() {
       <div className="px-6">
         <Button className="w-full">Checkout</Button>
       </div>
-      
+
     </SheetContent>
   )
 }
