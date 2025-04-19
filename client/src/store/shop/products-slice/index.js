@@ -37,7 +37,7 @@ const shoppingProductSlice = createSlice({
   name :'shoppingProducts',
   initialState,
   reducers : {
-    setProductDetails: (state) => {
+    setProduccvtDetails: (state) => {
       state.productDetails = null
     }
   },
